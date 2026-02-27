@@ -1,0 +1,1 @@
+{"Version":3,"FileReferences":{"Moc":"l2d MPH0.moc3","Textures":["l2d MPH0.4096/texture_00.png"],"Physics":"l2d MPH0.physics3.json","DisplayInfo":"l2d MPH0.cdi3.json"},"Groups":[{"Target":"Parameter","Name":"LipSync","Ids":[]},{"Target":"Parameter","Name":"EyeBlink","Ids":[]}]}
