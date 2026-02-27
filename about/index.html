@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>关于页 | 提斯沙盘</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.png"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://tithmph.github.io/about/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="关于页"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="提斯沙盘"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.png"><link rel="apple-touch-icon" href="/img/pwa/favicon.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":false},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: false,
+    is_page: true,
+    is_home: false,
+    page: 'about',
+    toc: false,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body id="body" data-type="about"><div><canvas id="universe"></canvas></div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/02/"><span class="date">2026/02</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><div class="back-home-button" tabindex="-1"><i class="solitude fas fa-bars-progress"></i></div><a href="/" title="返回博客主页" id="site-name"><span class="title">Solitude</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">关于页</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="page"><div id="about-page"><div class="author-info"><div class="author-tag-left"><span class="author-tag">👑魂系列全成就，并非老人</span><span class="author-tag">🔍搜索oc饭中</span><span class="author-tag">👽 我是外星人，别压力我</span></div><div class="author-img"><img src="https://cdn.lightxi.com/cloudreve/uploads/2025/08/01/tT8ILteu_logo.avif"/></div><div class="author-tag-right"><span class="author-tag">动画创作者 🏃</span><span class="author-tag">游戏开发？ 🧱</span><span class="author-tag">来都来了，看看我oc再走吧 👻</span></div></div><div class="author-title">关于本站</div><div class="author-content"><div class="author-content-item myInfoAndWittyWord"><div class="title1">欢迎来到Tithmph的神秘页面</div><div class="title2"><span class="inline-word">我是栗英狸，栗起占位作用</span></div><div class="title1">是一名学生、动画制作者、独立开发者、游戏美术</div></div><div class="aboutsiteTips author-content-item"><div class="author-content-item-tips">追求</div><h2><span class="inline-word">源于<br>热爱而去创造</span><div class="mask"><span class="first-tips" data-show="">优秀的产品（对</span><span>出色的美术</span><span>黑黑的环</span><span data-up="">有无后院</span></div></h2></div></div><script>var pursuitInterval = null;
+pursuitInterval = setInterval(function () {
+    const show = document.querySelector('span[data-show]')
+    const next = show.nextElementSibling || document.querySelector('.first-tips')
+    const up = document.querySelector('span[data-up]')
+    if (up) {
+        up.removeAttribute('data-up')
+    }
+    show.removeAttribute('data-show')
+    show.setAttribute('data-up', '')
+    next.setAttribute('data-show', '')
+}, 2000)
+
+document.addEventListener('pjax:send', function () {
+    clearInterval(pursuitInterval);
+});</script><div class="author-content"><div class="author-content-item skills"><div class="card-content"><div class="author-content-item-tips">技能</div><span class="author-content-item-title">开启创造力</span><div class="skills-style-group"><div class="tags-group-all"><div class="tags-group-wrapper"><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#fff"><i class="fab fa-java" title="Java" style="color: "></i></div><div class="tags-group-icon" style="background:#57b6e6"><i class="fab fa-docker" title="Docker" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#333"><i class="fab fa-node" title="Node" style="color: "></i></div><div class="tags-group-icon" style="background:#b8f0ae"><i class="fab fa-vuejs" title="Vue" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#f7cb4f"><i class="fab fa-js" title="JS" style="color: "></i></div><div class="tags-group-icon" style="background:#e9572b"><i class="fab fa-html5" title="HTML" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#df5b40"><i class="fab fa-git" title="Git" style="color: "></i></div><div class="tags-group-icon" style="background:#fff"><i class="fab fa-java" title="Java" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#57b6e6"><i class="fab fa-docker" title="Docker" style="color: "></i></div><div class="tags-group-icon" style="background:#333"><i class="fab fa-node" title="Node" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#b8f0ae"><i class="fab fa-vuejs" title="Vue" style="color: "></i></div><div class="tags-group-icon" style="background:#f7cb4f"><i class="fab fa-js" title="JS" style="color: "></i></div></div><div class="tags-group-icon-pair"><div class="tags-group-icon" style="background:#e9572b"><i class="fab fa-html5" title="HTML" style="color: "></i></div><div class="tags-group-icon" style="background:#df5b40"><i class="fab fa-git" title="Git" style="color: "></i></div></div></div></div><div class="skills-list"><div class="skill-info"><div class="skill-icon" style="background:#fff"><i class="fab fa-java" title="Java" style="color: "></i></div><div class="skill-name"><span>Java</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#57b6e6"><i class="fab fa-docker" title="Docker" style="color: "></i></div><div class="skill-name"><span>Docker</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#333"><i class="fab fa-node" title="Node" style="color: "></i></div><div class="skill-name"><span>Node</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#b8f0ae"><i class="fab fa-vuejs" title="Vue" style="color: "></i></div><div class="skill-name"><span>Vue</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#f7cb4f"><i class="fab fa-js" title="JS" style="color: "></i></div><div class="skill-name"><span>JS</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#e9572b"><i class="fab fa-html5" title="HTML" style="color: "></i></div><div class="skill-name"><span>HTML</span></div></div><div class="skill-info"><div class="skill-icon" style="background:#df5b40"><i class="fab fa-git" title="Git" style="color: "></i></div><div class="skill-name"><span>Git</span></div></div><div class="etc">...</div></div></div></div></div><div class="author-content-item careers"><div class="card-content"><div class="author-content-item-tips">生涯</div><span class="author-content-item-title">无限进步</span><div class="careers-group"><div class="careers-item"><div class="circle" style="background:#357ef5"></div><div class="name">软件工程, 学习</div></div></div><img class="author-content-img" src="https://cdn.lightxi.com/cloudreve/uploads/2025/07/31/y5BrUhFv_67a216483c354.webp" alt="生涯"/></div></div></div><div class="author-content"><div class="author-content-item personalities"><div class="author-content-item-tips">性格</div><span class="author-content-item-title">建筑师</span><div class="title2" style="color:#9400D3">INTJ-A / INTJ-T</div><div class="image"><img class="nolazyload" src="/images/intj.png"/></div><div class="post-tips">在 <a target="_blank" rel="noopener" href="https://www.16personalities.com/">16personalities </a>了解更多关于 <a target="_blank" rel="noopener" href="https://www.16personalities.com/ch/intj-人格">建筑师</a></div></div><div class="author-content-item myphoto"><img class="author-content-img" src="/images/prd.png" alt="my photo"/></div></div><div class="author-content"><div class="author-content-item maxim"><div class="author-content-item-tips">座右铭</div><span class="maxim-title"><span>先相信自己</span><span></span></span></div><div class="author-content-item buff"><div class="card-content"><div class="author-content-item-tips">特长</div><span class="buff-title"><span>美术：人物设计，插画，ui设计，场景绘制，软件使用<span class="inline-word">专家（并非）</span></span><span>学习能力<span class="inline-word">MAX</span></span></span></div></div></div><div class="author-content"><style>.game-0::after {
+    box-shadow: 0 -69px 203px 11px #04120f inset !important;
+}</style><div class="author-content-item game game-0" style="background: url(/images/ds3.jpg) no-repeat top; background-size: cover;"><div class="card-content"><div class="author-content-item-tips">游戏爱好</div><span class="author-content-item-title">DARK SOULSⅢ</span><div class="content-bottom"><div class="tips">pvp</div><div class="tips">有无后院</div></div></div></div><style>.game-1::after {
+    box-shadow: 0 -69px 203px 11px #415dc9 inset !important;
+}</style><div class="author-content-item game game-1" style="background: url(/images/nr.jpg) no-repeat top; background-size: cover;"><div class="card-content"><div class="author-content-item-tips">游戏爱好</div><span class="author-content-item-title">Elden RING：NIGHTREIGN</span><div class="content-bottom"><div class="tips">区</div></div></div></div></div><div class="author-content"><div class="author-content-item comic"><div class="card-content"><div class="author-content-item-tips">爱好番剧</div><span class="author-content-item-title">追番</span><div class="content-bottom"><div class="tips">科幻</div><div class="banner-button-group"><a class="banner-button" href="/pyq/"><i class="solitude fas fa-circle-chevron-right"></i><span class="banner-button-text">观看记录</span></a></div></div><div class="comic-box"><a class="comic-item" href="https://www.bilibili.com/video/BV18f6fBEE8m/?spm_id_from=333.337.search-card.all.click" target="_blank" rel="noopener noreferrer" title="HELLSING"><div class="comic-item-cover"><img class="nolazyload" src="https://i0.hdslb.com/bfs/archive/fbd1422a8fc131758e739317a0ae2cf5f5a0e433.jpg@672w_378h_1c_!web-search-common-cover.avif" alt="HELLSING"/></div></a><a class="comic-item" href="https://www.bilibili.com/video/BV1CtKHzNEZf/?spm_id_from=333.337.search-card.all.click" target="_blank" rel="noopener noreferrer" title="吸血鬼猎人D"><div class="comic-item-cover"><img class="nolazyload" src="https://i0.hdslb.com/bfs/archive/266fca2fd5a49ac3b4c56b7320d74b189630eada.jpg@672w_378h_1c_!web-search-common-cover.avif" alt="吸血鬼猎人D"/></div></a><a class="comic-item" href="https://www.bilibili.com/video/BV1BsnizeEN3/?spm_id_from=333.337.search-card.all.click" target="_blank" rel="noopener noreferrer" title="剑风传奇"><div class="comic-item-cover"><img class="nolazyload" src="https://i0.hdslb.com/bfs/archive/448c108a72517f25b40a233bc67a0f88307d13eb.jpg@672w_378h_1c_!web-search-common-cover.avif" alt="剑风传奇"/></div></a><a class="comic-item" href="https://www.bilibili.com/video/BV12tCSBbECn/?spm_id_from=333.337.search-card.all.click" target="_blank" rel="noopener noreferrer" title="强大九人"><div class="comic-item-cover"><img class="nolazyload" src="https://i0.hdslb.com/bfs/archive/f971911d6a250be92cf58537a2e54a285219ea09.jpg@672w_378h_1c_!web-search-common-cover.avif" alt="强大九人"/></div></a><a class="comic-item" href="https://www.bilibili.com/video/BV1hTzqBDExt/?spm_id_from=333.337.search-card.all.click" target="_blank" rel="noopener noreferrer" title="鬼泣TV"><div class="comic-item-cover"><img class="nolazyload" src="https://i1.hdslb.com/bfs/archive/16a9734736527736b102fb1590f1185aef4ea372.jpg@672w_378h_1c_!web-search-common-cover.avif" alt="鬼泣TV"/></div></a></div></div></div><div class="author-content-item like-technology" style="background: url(https://solitude.js.org/example.png) no-repeat center/cover"><div class="card-content"><div class="author-content-item-tips">关注偏好</div><span class="author-content-item-title">绘画</span><div class="content-bottom"><div class="tips">！？私斋？！</div></div></div></div><div class="author-content-item like-music" style="background: url(/images/bk.png) no-repeat center/cover"><div class="card-content"><div class="author-content-item-tips">音乐偏好</div><span class="author-content-item-title">蓝调入魂</span><div class="content-bottom"><div class="tips">黑键乐队</div><div class="banner-button-group"><a class="banner-button" href="/music/"><i class="solitude fas fa-circle-chevron-right"></i><span class="banner-button-text">更多推荐</span></a></div></div></div></div></div><div class="author-content"><div class="about-statistic author-content-item" style="background: url(https://i.p-i.vip/33/20250725-6883987819a97.webp);"><div class="card-content"><div class="author-content-item-tips">数据</div><span class="author-content-item-title">访问统计</span><div id="statistic"></div><div class="post-tips">本站采用自建数据统计</div></div><script>fetch("https://umami-api.holyfox.net/")
+    .then(res => res.json())
+    .then(data => {
+        const title = {"today_uv": "今日人数", "today_pv": "今日访问", "yesterday_uv": "昨日人数", "yesterday_pv": "昨日访问", "last_month_pv": "最近月访问", "last_year_pv": "最近年访问"};
+
+        let s = document.getElementById("statistic");
+
+        for (let key in data) {
+        if (data.hasOwnProperty(key) && title[key]) {
+            s.innerHTML += `<div><span>${title[key]}</span><span id="${key}">${data[key]}</span></div>`;
+        }
+        }
+    });
+
+</script></div><style>:root {
+    --site-about-oneself-map--light: url(https://solitude.js.org/example.png);
+    --site-about-oneself-map--dark: url(https://solitude.js.org/example.png);
+}</style><div class="author-content-item-group column mapAndInfo"><div class="author-content-item map single"><span class="map-title">我现在住在中国，福建省</span></div><div class="author-content-item selfInfo single"><div><span class="selfInfo-title">生于</span><span class="selfInfo-content" style="color: #43a6c6;">2007</span></div><div><span class="selfInfo-title">！？还在上学？！</span><span class="selfInfo-content" style="color: #c69043;">影视动画</span></div><div><span class="selfInfo-title">现在职业</span><span class="selfInfo-content" style="color: #b04fe6;">学生</span></div></div></div></div><div class="author-content"><div class="create-site-post author-content-item single"><div class="author-content-item-tips">心路历程</div><span class="author-content-item-title">为什么建站？</span><br>在创建这个站之前，我在notion和其他地方都搭建过网站，不过没这么正式。想要就是能够有一个属于自己的地方。和他人分享，会让这些成为积累和沉淀。如果能够帮助到更多的人，帮助更多人解决问题，那一定是非常棒的事情。 <br> 与大多数垂直类的技术博客不同，这里只有我的画，我的口嗨。 <br> 这些就是我的目的，既然来了，看看我oc们再走？ <br></div></div><div class="author-content" id="tenyear"><div class="create-site-post author-content-item single"><div class="author-content-item-tips">十年之约</div><div class="author-content-item-title">玩一辈子魂游吧</div><p></p><div class="tenyear-timeline"><div class="progress"></div><div class="past-time"></div><div class="percentage-label"></div></div><div class="time-labels"><div class="start-time" id="tenyear-start-time">2025/1/1</div><div class="end-time" id="tenyear-end-time">2035/1/1</div></div></div></div><script>function updateTenYearProgress() {
+    let progressElement = document.querySelector(".progress");
+    let pastTimeElement = document.querySelector(".past-time");
+    let percentageLabelElement = document.querySelector(".percentage-label");
+    let startTimeElement = document.getElementById("tenyear-start-time");
+    let endTimeElement = document.getElementById("tenyear-end-time");
+    let startTime = new Date(startTimeElement.textContent).getTime();
+    let endTime = new Date(endTimeElement.textContent).getTime();
+
+    const currentTime = new Date().getTime();
+    const progress = ((currentTime - startTime) / (endTime - startTime) * 100);
+    const progressPercentage = Math.min(progress, 100) + "%";
+
+    pastTimeElement.style.setProperty("--past-time-percentage", progress + "%");
+    progressElement.style.setProperty("--progress-percentage", progressPercentage);
+    if (progress > 5) {
+        percentageLabelElement.textContent = `${progress.toFixed(0)}%`;
+        percentageLabelElement.style.left = `calc(${progress}% - 35px)`;
+    }
+
+    percentageLabelElement.style.visibility = "visible";
+}
+
+if (document.getElementById("tenyear")) {
+    updateTenYearProgress();
+}</script><div class="author-content"><div class="author-content-item single reward"><div class="author-content-item-tips">致谢</div><span class="author-content-item-title">赞赏名单</span><div class="author-content-item-description">感谢赞赏的人，因为你们，让我感受到写博客这件事情能够给你们创造了价值。这会让我在这条路上走得更远。</div><div class="reward-list-all"><div class="reward-list-item"><div class="reward-list-item-name">❖星港◎Star☆</div><div class="reward-list-bottom-group"><div class="reward-list-item-money" style="background-color:#09bb07"><i class="solitude fab fa-weixin"></i>¥ 100</div><time class="datetime reward-list-item-time" datetime="2025-01-01T08:00:00+08:00"></time></div></div><div class="reward-list-item"><div class="reward-list-item-name">沫塔尔猫</div><div class="reward-list-bottom-group"><div class="reward-list-item-money" style="background-color:#1677FF"><i class="solitude fab fa-alipay"></i>¥ 100</div><time class="datetime reward-list-item-time" datetime="2025-01-01T08:00:00+08:00"></time></div></div></div><div class="reward-list-tips"><p>总金额：¥ 200.00，将全部用于博客的维护和更新。</p></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="/img/logo.png"></div><div class="description"></div><div class="bottom-group"><span class="left"><div class="name">Tithmph栗英狸</div><div class="desc">Turn blue</div></span><div class="social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/02/27/My-New-Post/" title="My New Post"><div class="content"><span class="title" href="/2026/02/27/My-New-Post/" title="My New Post">My New Post</span></div></a><a class="aside-list-item" href="/2026/02/26/hello-world/" title="Hello World"><div class="content"><span class="title" href="/2026/02/26/hello-world/" title="Hello World">Hello World</span></div></a></div></div><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"></div><style>.card-tag-cloud::after {
+    display: none !important;
+}</style><hr><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章总数 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">建站天数 :</div><div class="item-count" id="runtimeshow"></div></div><div class="webinfo-item"><div class="item-name">最后更新 :</div><time class="item-count" datetime="2026-02-27T06:55:13.254Z"></time></div></div></div></div></div></main><footer id="footer"><div id="st-footer"><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2026 By&nbsp;<a class="footer-bar-link" href="/" title="Tithmph栗英狸">Tithmph栗英狸<img class="author-avatar" src="/img/pwa/favicon.png">Tithmph栗英狸</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" href="/" title=""></a>Home<a class="footer-bar-link" href="/about/" title=""></a>About</div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-commenttext"><i class="solitude fas fa-comment-medical"></i><span>引用到评论</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/02/27/My-New-Post/","2026/02/26/hello-world/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
