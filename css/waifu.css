@@ -1,0 +1,16 @@
+#waifu {
+  position: fixed;       /* 固定在窗口 */
+  bottom: 0;             /* 底部对齐 */
+  right: 20px;           /* 右边距 */
+  width: 40%;            /* 缩小到原来的 40% */
+  max-width: 300px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.model {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}

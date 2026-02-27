@@ -3,26 +3,26 @@ const layers = [
   "body",
   "coat",
   "board",
-  "hair back",
-  "ear left",
-  "ear right",
+  "hair_back",
+  "ear_left",
+  "ear_right",
   "face",
-  "eye down",
+  "eye_down",
   "eyeup",
   "eyeball",
-  "eye closen",
+  "eye_closen",
   "meimao",
-  "mouth open",
+  "mouth_open",
   "glass",
-  "hair front black",
-  "hair front1",
-  "hair right",
+  "hair_front_black",
+  "hair_front1",
+  "hair_right",
   "hat",
-  "arm down",
-  "arm up",
+  "arm_down",
+  "arm_up",
   "hand",
-  "star left",
-  "star right",
+  "star_left",
+  "star_right",
   "tear",
   "sad",
   "mad"
@@ -66,3 +66,28 @@ setInterval(() => {
     eyeClose.style.display = "none";
   }, 200);
 }, 3000);
+
+
+container.style.height = 'auto';
+container.style.overflow = 'visible';
+
+// 呼吸动画（缩放）
+setInterval(() => {
+  if (!container) return;
+
+  container.style.transform = "scale(1.02)";
+  setTimeout(() => {
+    container.style.transform = "scale(1)";
+  }, 1000);  // 每次呼吸 1 秒
+}, 3000);  // 每 3 秒呼吸一次
+
+// 张嘴动画
+setInterval(() => {
+  const mouth = document.getElementById("mouth_open");
+  if (!mouth) return;
+
+  mouth.style.display = "block";  // 张嘴
+  setTimeout(() => {
+    mouth.style.display = "none"; // 合上嘴
+  }, 500); // 张嘴持续时间
+}, 4000);  // 每隔 4 秒张嘴一次
