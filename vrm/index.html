@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<style>
+html,body{
+margin:0;
+padding:0;
+overflow:hidden;
+background:transparent;
+}
+
+canvas{
+display:block;
+background:transparent;
+}
+</style>
+
+</head>
+
+<body>
+
+<script type="importmap">
+{
+"imports": {
+"three": "https://cdn.jsdelivr.net/npm/three@0.176.0/build/three.module.js",
+"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.176.0/examples/jsm/",
+"@pixiv/three-vrm": "https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3/lib/three-vrm.module.min.js"
+}
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three"
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js"
+import {VRMLoaderPlugin,VRMUtils,VRMHumanBoneName} from "@pixiv/three-vrm"
+
+let currentVrm
+
+const renderer=new THREE.WebGLRenderer({
+alpha:true,
+antialias:true
+})
+
+renderer.setSize(window.innerWidth,window.innerHeight)
+renderer.setClearColor(0x000000,0)
+
+document.body.appendChild(renderer.domElement)
+
+const scene=new THREE.Scene()
+
+const camera=new THREE.PerspectiveCamera(
+30,
+window.innerWidth/window.innerHeight,
+0.1,
+20
+)
+
+camera.position.set(0,1.35,2.6)
+
+scene.add(new THREE.DirectionalLight(0xffffff,1.5))
+scene.add(new THREE.AmbientLight(0xffffff,1))
+
+const loader=new GLTFLoader()
+
+loader.register(parser=>{
+return new VRMLoaderPlugin(parser)
+})
+
+loader.load(
+
+"./VRM/prdx.vrm",
+
+(gltf)=>{
+
+const vrm=gltf.userData.vrm
+
+VRMUtils.removeUnnecessaryVertices(gltf.scene)
+VRMUtils.combineSkeletons(gltf.scene)
+
+vrm.scene.traverse(obj=>{
+obj.frustumCulled=false
+})
+
+scene.add(vrm.scene)
+
+vrm.scene.rotation.y=0
+
+currentVrm=vrm
+
+}
+
+)
+
+/* 鼠标 */
+
+let mouseX=0
+let mouseY=0
+
+window.addEventListener("message",(e)=>{
+
+if(e.data.type==="mouseMove"){
+
+mouseX=e.data.x
+mouseY=e.data.y
+
+}
+
+})
+
+let targetX=0
+let targetY=0
+
+const clock=new THREE.Clock()
+
+let blinkTimer=0
+let breathe=0
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+const delta=clock.getDelta()
+
+if(currentVrm){
+
+currentVrm.update(delta)
+
+updateLook()
+
+applyArmPose()
+
+blink(delta)
+
+breathing()
+
+}
+
+renderer.render(scene,camera)
+
+}
+
+animate()
+
+/* 头部追踪 */
+
+function updateLook(){
+
+targetX+=(mouseX-targetX)*0.08
+targetY+=(mouseY-targetY)*0.08
+
+const neck=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.Neck)
+const head=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.Head)
+
+if(neck){
+neck.rotation.y=targetX*0.5
+neck.rotation.x=targetY*0.25
+}
+
+if(head){
+head.rotation.y=targetX*0.35
+head.rotation.x=targetY*0.35
+}
+
+/* 眼睛 */
+
+const eyeL=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.LeftEye)
+const eyeR=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.RightEye)
+
+if(eyeL&&eyeR){
+
+eyeL.rotation.y=targetX*0.12
+eyeR.rotation.y=targetX*0.12
+
+eyeL.rotation.x=targetY*0.08
+eyeR.rotation.x=targetY*0.08
+
+}
+
+}
+
+/* 手臂自然下垂 */
+
+function applyArmPose(){
+
+const lArm=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.LeftUpperArm)
+const rArm=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.RightUpperArm)
+
+const lLower=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.LeftLowerArm)
+const rLower=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.RightLowerArm)
+
+/* 改这里：方向反过来 */
+
+if(lArm){
+
+lArm.rotation.z=-1.35
+lArm.rotation.x=0.08
+
+}
+
+if(rArm){
+
+rArm.rotation.z=1.35
+rArm.rotation.x=0.08
+
+}
+
+/* 手肘微弯 */
+
+if(lLower){
+lLower.rotation.z=0.05
+}
+
+if(rLower){
+rLower.rotation.z=-0.05
+}
+
+}
+
+/* 眨眼 */
+
+function blink(delta){
+
+blinkTimer+=delta
+
+if(blinkTimer>2+Math.random()*3){
+
+currentVrm.expressionManager.setValue("blink",1)
+
+setTimeout(()=>{
+currentVrm.expressionManager.setValue("blink",0)
+},120)
+
+blinkTimer=0
+
+}
+
+}
+
+/* 呼吸 */
+
+function breathing(){
+
+breathe+=0.015
+
+const chest=currentVrm.humanoid.getNormalizedBoneNode(VRMHumanBoneName.Chest)
+
+if(chest){
+
+chest.rotation.x=Math.sin(breathe)*0.02
+
+}
+
+}
+
+window.addEventListener("click",()=>{
+
+currentVrm.expressionManager.setValue("happy",1)
+
+setTimeout(()=>{
+currentVrm.expressionManager.setValue("happy",0)
+},800)
+
+})
+
+window.addEventListener("resize",()=>{
+
+camera.aspect=window.innerWidth/window.innerHeight
+camera.updateProjectionMatrix()
+
+renderer.setSize(window.innerWidth,window.innerHeight)
+
+})
+
+</script>
+
+</body>
+</html>
