@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>导览界面 | 提斯沙盘</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.png"><link rel="stylesheet" href="/css/index.css?v=3.0.21"><link rel="canonical" href="https://tithmph.github.io/2026/03/10/%E5%AF%BC%E8%A7%88%E7%95%8C%E9%9D%A2/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="新的开始——导览界面 伪科学，完全虚构的世界观和物理法则，不必对每一个名词较真 阅读时长+++，有很长的历史叙事和特定时间段的了解前提，读完不明所以的情况是正常的 平行时空，多元宇宙的设定 虚拟的政治和历史，特定情况下高强度键政，阴谋论，反乌托邦成分有 在这里出现的💡框框基本都是以"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="提斯沙盘"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.png"><link rel="apple-touch-icon" href="/img/pwa/favicon.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.21' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: false,
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: 'post',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body id="body" data-type="post"><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/03/"><span class="date">2026/03</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2026/02/"><span class="date">2026/02</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">6</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">Solitude</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">导览界面</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://tithmph.github.io/image/fengmian2.jpg" alt="导览界面"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为转载或翻译文章，注意版权协议">转载或翻译</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">导览界面</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><div class="post-radius-bottom"></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content article-container"><h1 id="新的开始——导览界面"><a href="#新的开始——导览界面" class="headerlink" title="新的开始——导览界面"></a>新的开始——导览界面</h1><ol>
+<li>伪科学，完全虚构的世界观和物理法则，不必对每一个名词较真  </li>
+<li>阅读时长+++，有很长的历史叙事和特定时间段的了解前提，读完不明所以的情况是正常的  </li>
+<li>平行时空，多元宇宙的设定  </li>
+<li>虚拟的政治和历史，特定情况下高强度键政，阴谋论，反乌托邦成分有  </li>
+<li>在这里出现的💡框框基本都是以我本人的视角进行的评价与叙述  </li>
+<li>有待补充</li>
+</ol>
+<hr>
+<h1 id="不互通的两个世界观——BPROR与Uptown13orgsPF"><a href="#不互通的两个世界观——BPROR与Uptown13orgsPF" class="headerlink" title="不互通的两个世界观——BPROR与Uptown13orgsPF"></a>不互通的两个世界观——BPROR与Uptown13orgsPF</h1><h2 id="1-BPROR（起始之页与雨中归源的首字母缩写也可以简称“起源”）相关"><a href="#1-BPROR（起始之页与雨中归源的首字母缩写也可以简称“起源”）相关" class="headerlink" title="1. BPROR（起始之页与雨中归源的首字母缩写也可以简称“起源”）相关"></a>1. BPROR（起始之页与雨中归源的首字母缩写也可以简称“起源”）相关</h2><h3 id="前文明简介"><a href="#前文明简介" class="headerlink" title="前文明简介"></a>前文明简介</h3><p>前文明在后世被称为风暴文明，也是大宇宙湮没-诞生循环之中的第四个宇宙。这里也要引入一个虚构的宇宙概念：在最初“创世奇点”的爆炸中诞生的宇宙，由于其各方面的局限性，很快便会支撑不住宇宙的扩张，这时就会导致宇宙的边界开始向内坍缩，最终这个宇宙将不复存在。坍缩倒计时结束后，整个宇宙重新归为一个奇点。</p>
+<p>前文明的主要故事就发生在这样一个宇宙之中。在宇宙停止生长的时候，宇宙边界（此时叫做升维消亡边界）在向中心收拢，这个时候全宇宙的未来已经凝固，即使掌握时间技术也无法逃离消亡的结局。所有生命体都将目标一致转向延续文明之火上</p>
+<p>人类无法指望未来，他们只能将目标转向过去，这个时候追溯的过往的故事会在无限的可能性之中产生质变，这也是平行时间线（很多支故事发生在这里）的由来，无数条时间线中他们势必要找到一个可以使目标实现的办法。最终他们总结出了一个规律，就如同大灭绝一样的升维瓶颈，只要突破这个始终无法实现的瓶颈就可以在灭绝之中找到新生的办法，而这个办法最终指向人类的起点，那个许久之前就毁灭的星球——起始星，也就是地球</p>
+<p>回到模拟出的起始星的这一行为被称作下潜，在意识海之中可见下潜人员带回的信息独立上传至终端之中，也即是使历史人物在终端中获得重生，历史长河中无数的文明就这样在宇宙毁灭之前爆发出耀眼的光芒。（这也是后来沙盘的技术原型）</p>
+<p>在最后，他们终于找到了一个办法，可以一定程度的影响下一个宇宙诞生时的情况。也就是为下一个宇宙编写了一个不会遭到边界消亡与坍缩结局的保障，最终汇聚成一本书的框架，并且保留了人类的生物特征，称呼他们为先驱（其他文明也有相对的保存自己的东西，这里就不多赘述）。但由于前文明人类的升维瓶颈为非生物手段造出真正的人类，他们未能攻克这一瓶颈，所以相对的，先驱永远只能无限接近于人类。当然这些都是下一个宇宙的事情了</p>
+<p>所有下潜模拟终端的起始星都在消亡的过程中化为无数个类似于创世奇点的物质，向着宇宙中心飞去，就如同一场雨。到此前文明的故事结束</p>
+<h3 id="补充一些碎片理解"><a href="#补充一些碎片理解" class="headerlink" title="补充一些碎片理解"></a>补充一些碎片理解</h3><p>前文明的主要故事时代可以认为是未来数年地球毁灭不知多少亿年的时代，人类更换了无数个宜居星球，<br>这里存在着追寻起始星（地球，地球坍缩后，被后人类称为起始星）的风暴漂泊者与新人类，在这之间，他们共同对抗同样追寻起始星的外星生物</p>
+<hr>
+<h2 id="现文明：起源的故事"><a href="#现文明：起源的故事" class="headerlink" title="现文明：起源的故事"></a>现文明：起源的故事</h2><p>紧接着前文明的灭绝，现文明在创世奇点的爆炸中诞生，如同每个宇宙诞生之初出现的基础物质，现文明也存在独特的维系整个世界运转的物质——魔力。它与广义可见的魔力不同，它需要特殊的手段才可以被观测，被使用。</p>
+<p>具体世界诞生过程：<a target="_blank" rel="noopener" href="https://www.notion.so/2642ae0d8568804999dfe4944ceb59fd?pvs=21">前创世纪</a></p>
+<p>接着我会在旁边放一些补充理解的设定</p>
+<p>Avinato纽带</p>
+<p>是共生魔Avinatota被斩首后由其脊柱所链接的丝状条形物体，尤其延伸出的生物科技具有链接两个个体甚至生物体与非生物体之间思维的效果<br>你可以这么理解，用这个接上了你的数位笔，你可以通过意念操控它画画，，<br>所以，我打算将「持有Avinato纽带」作为两个或多个不同时期或不同世界观的同一角色的标记，比如起源的埃米利诺和前文明的“Emiliano”，土豆和马铃薯，番茄和西红柿…</p>
+<hr>
+<h1 id="2-UPtown13orgsPF"><a href="#2-UPtown13orgsPF" class="headerlink" title="2.UPtown13orgsPF"></a>2.UPtown13orgsPF</h1><p>嗯嗯既然如此在这里放一张自设哥</p>
+<p>主要围绕着一群不法分子展开的故事（）。复古版罪恶都市（也不是）剧情很杂，但主要可以聚焦在Audrina·Vermiglio个人的两段人生经历上面</p>
+<p>图为部分角色，左一Fabio Belfiore，右一为Giovanni Bianchi，上为Matto，下为Nicola·Russo</p>
+<p>图为支线《黄金之眼》中Audrina·Vermiglio与Green·W的对话节选</p>
+<p>Cult片演员Elara与她的经纪人Lorenzo（和Vermiglio家族的那个只是重名）</p>
+<p>主要势力（部分）</p>
+<p>意大利篇结束后，一刻也没有为死去的人哀悼，立马赶到战场的是——美国篇</p>
+<p>其实都是我乱编的，不用细想，这里有很多我和亲友合作的角色，和上面一样，看个开心就好</p>
+<p>部分家族</p>
+<hr>
+<h2 id="上城十三机关"><a href="#上城十三机关" class="headerlink" title="上城十三机关"></a>上城十三机关</h2><p>第九机关的成员们</p>
+<p>高脚杯的领导人Barbela</p>
+<p>第三机关的领导人X· Thades</p>
+<p>部分机关</p>
+<p>Audrina达到自己的目的后，告别了合作伙伴老狐狸Sandro和”微笑先生“Alessandro，前往美国发展家族的新势力，但是在那里，还有更多的人与事等待着她。国际因素影响下，C州的政治势力复杂，地区综合治安混乱，在无休止的纷争下C州自身形成了多方势力，慢慢演变成了目前的十一大机关，当然，国家也相对需要处理这个无法无天的地区，在C州的武装抵抗拉锯下，国家不得不承认C州的特殊性，并且协商产生了狄刻检察院来管理C州。</p>
+<p>峰会每年举办两次，于每年的一月初与十二月末商讨下十一机关的评级，定位，以及新季度的经济目标，地区治安方案等。在出现机关被吞并&#x2F;毁灭，金融风暴，政治影响的突发情况下，峰会会提前召开。</p>
+<p>以不同产业以及其产生的经济效应，利润等划分的地区的领导阶层定下的前十一大机关，也可以看作十一个公司。以第一机关向下排序，主要评定是第一产业以及全年经济与地区治安。</p>
+<p>一个机关有其相对的一定势力范围，相对的一个机关内也会有一些小的组织直属于这些机关。峰会上不允许参会人员携带武器，狄刻检察院的武装力量会驻守峰会外场。峰会分为内外两场，内场为领导人会议，外场为酒会，属于前十一机关的高层互访活动</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">Tithmph栗英狸</div><div class="post-copyright__author_desc">Tithmph栗英狸</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是转载或翻译文章，版权归原作者所有。转载本文请联系原作者。</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/10/HelloWorld/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OC 时间线简介</div></div></a></div><div class="next-post pull-right"><a href="/2026/02/27/hello-world/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="/img/logo.png"></div><div class="description"></div><div class="bottom-group"><span class="left"><div class="name">Tithmph栗英狸</div><div class="desc">只有迎风，风筝才能飞得更高。</div></span><div class="social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B%E2%80%94%E2%80%94%E5%AF%BC%E8%A7%88%E7%95%8C%E9%9D%A2"><span class="toc-text">新的开始——导览界面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8D%E4%BA%92%E9%80%9A%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%B8%96%E7%95%8C%E8%A7%82%E2%80%94%E2%80%94BPROR%E4%B8%8EUptown13orgsPF"><span class="toc-text">不互通的两个世界观——BPROR与Uptown13orgsPF</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-BPROR%EF%BC%88%E8%B5%B7%E5%A7%8B%E4%B9%8B%E9%A1%B5%E4%B8%8E%E9%9B%A8%E4%B8%AD%E5%BD%92%E6%BA%90%E7%9A%84%E9%A6%96%E5%AD%97%E6%AF%8D%E7%BC%A9%E5%86%99%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%AE%80%E7%A7%B0%E2%80%9C%E8%B5%B7%E6%BA%90%E2%80%9D%EF%BC%89%E7%9B%B8%E5%85%B3"><span class="toc-text">1. BPROR（起始之页与雨中归源的首字母缩写也可以简称“起源”）相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%96%87%E6%98%8E%E7%AE%80%E4%BB%8B"><span class="toc-text">前文明简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%89%87%E7%90%86%E8%A7%A3"><span class="toc-text">补充一些碎片理解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E6%96%87%E6%98%8E%EF%BC%9A%E8%B5%B7%E6%BA%90%E7%9A%84%E6%95%85%E4%BA%8B"><span class="toc-text">现文明：起源的故事</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-UPtown13orgsPF"><span class="toc-text">2.UPtown13orgsPF</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E5%9F%8E%E5%8D%81%E4%B8%89%E6%9C%BA%E5%85%B3"><span class="toc-text">上城十三机关</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/03/12/%E8%AA%93%E7%BA%A6%E4%BD%93%E7%B3%BB%E4%B8%8E%E4%BD%8D%E9%9D%A2%E6%B3%95%E5%88%99%E7%A0%94%E7%A9%B6%E7%BA%B2%E8%A6%81/" title="誓约体系与位面法则研究纲要"><div class="thumbnail"><img alt="誓约体系与位面法则研究纲要" src="https://tithmph.github.io/image/sy.png"></div><div class="content"><span class="title" href="/2026/03/12/%E8%AA%93%E7%BA%A6%E4%BD%93%E7%B3%BB%E4%B8%8E%E4%BD%8D%E9%9D%A2%E6%B3%95%E5%88%99%E7%A0%94%E7%A9%B6%E7%BA%B2%E8%A6%81/" title="誓约体系与位面法则研究纲要">誓约体系与位面法则研究纲要</span></div></a><a class="aside-list-item" href="/2026/03/11/%E5%B0%86VRM%E6%A8%A1%E5%9E%8B%E7%9C%8B%E6%9D%BF%E5%A8%98%E6%8F%92%E5%85%A5HEXO%E5%8D%9A%E5%AE%A2%E7%95%8C%E9%9D%A2%E7%9A%84%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" title="基于HEXO的VRM看板娘调试经验"><div class="thumbnail"><img alt="基于HEXO的VRM看板娘调试经验" src="https://Tithmph.github.io/image/waifu2.png"></div><div class="content"><span class="title" href="/2026/03/11/%E5%B0%86VRM%E6%A8%A1%E5%9E%8B%E7%9C%8B%E6%9D%BF%E5%A8%98%E6%8F%92%E5%85%A5HEXO%E5%8D%9A%E5%AE%A2%E7%95%8C%E9%9D%A2%E7%9A%84%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" title="基于HEXO的VRM看板娘调试经验">基于HEXO的VRM看板娘调试经验</span></div></a><a class="aside-list-item" href="/2026/03/11/%E7%A9%B9%E9%A1%B6%E7%89%B9%E5%B7%A5%E6%A1%A3%E6%A1%88%EF%BC%9A%E5%9F%BA%E4%BA%8E%E8%87%AA%E5%AE%B6%E4%B8%96%E7%95%8C%E8%A7%82%E7%9A%84TRPG%E8%87%AA%E5%8A%A8%E8%BD%A6%E5%8D%A1%E6%96%87%E4%BB%B6/" title="穹顶计划：TRPG特工档案系统"><div class="thumbnail"><img alt="穹顶计划：TRPG特工档案系统" src="/image/qd.jpg"></div><div class="content"><span class="title" href="/2026/03/11/%E7%A9%B9%E9%A1%B6%E7%89%B9%E5%B7%A5%E6%A1%A3%E6%A1%88%EF%BC%9A%E5%9F%BA%E4%BA%8E%E8%87%AA%E5%AE%B6%E4%B8%96%E7%95%8C%E8%A7%82%E7%9A%84TRPG%E8%87%AA%E5%8A%A8%E8%BD%A6%E5%8D%A1%E6%96%87%E4%BB%B6/" title="穹顶计划：TRPG特工档案系统">穹顶计划：TRPG特工档案系统</span></div></a><a class="aside-list-item" href="/2026/03/10/HelloWorld/" title="OC 时间线简介"><div class="thumbnail"><img alt="OC 时间线简介" src="https://tithmph.github.io/image/fengmian.jpg"></div><div class="content"><span class="title" href="/2026/03/10/HelloWorld/" title="OC 时间线简介">OC 时间线简介</span></div></a><a class="aside-list-item" href="/2026/03/10/%E5%AF%BC%E8%A7%88%E7%95%8C%E9%9D%A2/" title="导览界面"><div class="thumbnail"><img alt="导览界面" src="https://tithmph.github.io/image/fengmian2.jpg"></div><div class="content"><span class="title" href="/2026/03/10/%E5%AF%BC%E8%A7%88%E7%95%8C%E9%9D%A2/" title="导览界面">导览界面</span></div></a></div></div></div></div></main><footer id="footer"><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2026 By<a class="footer-bar-link" href="/" title="Tithmph栗英狸">Tithmph栗英狸</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div class="footer-bar-right"></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.21"></script><script src="/js/main.js?v=3.0.21"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.21"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/tw_cn.js?v=3.0.21"></script><!-- UI enhancement scripts--><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><div class="js-pjax"></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/03/12/誓约体系与位面法则研究纲要/","2026/03/11/将VRM模型看板娘插入HEXO博客界面的调试记录/","2026/03/11/穹顶特工档案：基于自家世界观的TRPG自动车卡文件/","2026/03/10/HelloWorld/","2026/03/10/导览界面/","2026/02/27/hello-world/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
